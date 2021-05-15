@@ -3,7 +3,7 @@
 This is a small sample project demonstrating how to build CanJS as frontend with FastAPI as backenend.
 
 ## Installation
-Frist install and build the frontend:
+First install and build the frontend:
 
 ```bash
 # Install the requirements:
