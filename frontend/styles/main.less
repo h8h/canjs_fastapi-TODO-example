@@ -1,0 +1,219 @@
+@danger-color: #a30000;
+@primary-color: cornflowerblue;
+@page-bg-color: #e2e1e0;
+@todo-bg-color: #fafafa;
+@todo-hover-color: #EEEEEE;
+@todo-done-color: lightgray;
+@todo-max-width: 450px;
+@base-size: 30px;
+@check-size: 24px;
+@half-size: @base-size / 2;
+@third-size: @base-size / 3;
+@base-font: 14px;
+@input-font: 21px;
+@header-font: 24px;
+* {
+    font-family: Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    background-color: @page-bg-color;
+    box-shadow: inset 0px 0px 5vw 0px rgba(0, 0, 0, 0.75);
+    min-height: 100vh;
+}
+todos-app {
+    max-width: @todo-max-width;
+    display: block;
+    background-color: @todo-bg-color;
+    margin: 35px auto;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    h1 {
+        font-size: @header-font;
+				line-height: @header-font;
+        padding: @base-size @base-size @half-size;
+    }
+    input:not([type="checkbox"]) {
+        font-size: @input-font;
+        padding: @third-size;
+        margin-left: @base-size - @third-size;
+        width: calc(~"100% - 150px");
+        @media (max-width: 419px) {
+						margin-left: @base-size;
+            width: calc(100% - 60px) !important;
+        }
+        + button {
+            font-size: @input-font;
+						font-weight: bold;
+            letter-spacing: 1px;
+            margin-left: @half-size;
+            width: @base-size * 3;
+            @media (max-width: 419px) {
+                width: calc(100% - 60px) !important;
+                margin: @third-size 0 0 @base-size !important;
+            }
+            padding: @third-size;
+            color: @todo-bg-color;
+            background-color: @primary-color;
+            border: none;
+            transition: all .25s ease-in-out;
+            &:hover {
+                box-shadow: 0 7px 14px rgba(0,0,0,0.25), 0 5px 5px rgba(0,0,0,0.22);
+            }
+        }
+    }
+    ul {
+        list-style: none;
+        padding-left: 0;
+        padding-top: @half-size;
+        li {
+            position: relative;
+            display: flex;
+            align-items: center;
+            text-align: left;
+            padding: 20px @base-size;
+            border-bottom: 1px dotted rgba(0, 0, 0, .25);
+            font-size: @base-font;
+            transition: all .3s ease-in-out;
+            &:last-of-type {
+                border-bottom: none;
+            }
+            &:hover {
+                background-color: @todo-hover-color;
+            }
+            span, input:not([type="checkbox"]) {
+                margin-right: auto;
+                margin-left: @half-size;
+                font-size: @input-font;
+            }
+            input:not([type="checkbox"]) {
+                position: relative;
+                margin-left: @base-size;
+                border: none;
+            }
+            span {
+                padding: @third-size;
+                + button {
+                    position: absolute;
+                    right: @base-size;
+                    width: @check-size;
+                    height: @check-size;
+                    line-height: @check-size;
+                    background-color: @todo-bg-color;
+                    border: 1px solid @todo-done-color;
+                    border-radius: 50%;
+                    text-align: center;
+                    text-decoration: none;
+                    cursor: default;
+                    &:before,
+                    &:after {
+                        position: absolute;
+                        top: 5px;
+                        left: 11px;
+                        content: ' ';
+                        height: 13px;
+                        width: 1px;
+                        background-color: @todo-done-color;
+                    }
+                    &:hover {
+                        border-color: @danger-color;
+                        background-color: @danger-color;
+                        color: @todo-bg-color;
+                        transition: background-color .3s ease-in-out;
+                        &:before,
+                        &:after {
+                            background-color: @todo-bg-color;
+                        }
+                    }
+                    &:before {
+                        transform: rotate(45deg);
+                    }
+                    &:after {
+                        transform: rotate(-45deg);
+                    }
+                }
+            }
+            label {
+                position: relative;
+                height: @check-size;
+                width: @check-size;
+                &::before, &::after {
+                    position: absolute;
+                    content: "";
+                    cursor: pointer;
+                }
+                /* Outside border of fake checkbox */
+                &::before {
+                    height: @check-size;
+                    width: @check-size;
+                    background-color: #FFFFFF;
+                    box-shadow: 0px 0px 0px 3px rgba(0, 0, 0, 0.5);
+                    left: 0px;
+                    top: 0;
+                    border-radius: 3px;
+                }
+                /* Checkmark of fake checkbox, hidden by default */
+                &::after {
+                    content: none;
+                    height: @check-size / 4;
+                    width: @check-size / 1.33;
+                    border-left: 3px solid;
+                    border-bottom: 3px solid;
+                    transform: rotate(-45deg);
+                    left: @check-size / 10;
+                    top: @check-size / 4;
+                }
+                &:focus-within {
+                    /*Adding focus styles on the outer-box of the fake checkbox*/
+                    outline: rgb(59, 153, 252) auto 5px;
+                }
+                input[type="checkbox"] {
+                    /* Hides real checkboxes, but not from the DOM */
+                    position: absolute;
+                    overflow: hidden;
+                    clip: rect(0 0 0 0);
+                    height: 1px; width: 1px;
+                    margin: -1px; padding: 0; border: 0;
+                }
+            }
+                    input:not([type="checkbox"]) {
+                        width: 100%;
+                        + button {
+                            /* Temp hides remove button when edit input is focused */
+                            position: absolute;
+                            overflow: hidden;
+                            clip: rect(0 0 0 0);
+                            height: 1px; width: 1px;
+                            margin: -1px; padding: 0; border: 0;
+                        }
+                    }
+            &.done {
+                /* Show checkmark of fake checkbox when clicked */
+                > label::after {
+                    content: "";
+                    opacity: 1;
+                    animation: fadeIn .2s ease-out forwards;
+                }
+                > span {
+                    text-decoration: line-through;
+                    color: @todo-done-color;
+                    font-style: italic;
+                    letter-spacing: 1px;
+                }
+            }
+        }
+    }
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: scale(0) rotate(-45deg);
+		transform-origin: center;
+	}
+	to {
+		opacity: 1;
+		transform: scale(1) rotate(-45deg);
+	}
+}
