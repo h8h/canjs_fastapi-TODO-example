@@ -59,4 +59,4 @@ async def delete_todo(id: str):
     return {"id": id}
 
 if __name__ == "__main__":
-    uvicorn.run("reportingtool:app", host="0.0.0.0", port=7000, log_level="info")
+    uvicorn.run("reportingtool:app", host="127.0.0.1", port=8080, log_level="info")
