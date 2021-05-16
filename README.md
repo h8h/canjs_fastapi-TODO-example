@@ -19,8 +19,8 @@ Then install and run the backend:
 cd backend/
 pip3 install -r requirements.txt
 
-# Start the service:
-./reportingtool.py
+# Start the API:
+./todoapi.py
 ```
 
 Now open the page http://127.0.0.1:8080/

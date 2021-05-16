@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import uvicorn
 from uuid import uuid4
 from typing import Iterable, Optional, Union
@@ -59,4 +60,4 @@ async def delete_todo(id: str):
     return {"id": id}
 
 if __name__ == "__main__":
-    uvicorn.run("reportingtool:app", host="127.0.0.1", port=8080, log_level="info")
+    uvicorn.run("todoapi:app", host="127.0.0.1", port=8080, log_level="info")

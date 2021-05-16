@@ -1,16 +1,15 @@
 {
-  "name": "reportingtool",
+  "name": "Example TODO",
   "version": "0.0.1",
-  "description": "A Frontend for the reporting tool api",
+  "description": "A Frontend for the todo example fastapi",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "develop": "webpack --progress --watch"
+    "develop": "webpack --progress"
   },
   "keywords": [
-    "reporting",
-    "tool",
-    "writing"
+    "todo",
+    "example"
   ],
   "author": "",
   "license": "BSD-2-Clause",
